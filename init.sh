@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Install nvim
+# sudo add-apt-repository ppa:neovim-ppa/stable
+# sudo add-apt-repository ppa:neovim-ppa/unstable
+# sudo apt-get update
+# sudo apt-get install neovim -y
+sudo snap install nvim --classic
+ln -s "$PWD/nvim" "$(realpath ~/.config/nvim)"
+
+# Install zsh
+sudo apt install zsh git -y
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install fnm (node manager)
+curl -fsSL https://fnm.vercel.app/install | bash
+source /home/sergeir/.bashrc
+fnm install --lts
+fnm default lts-latest
+fnm use lts-latest
+
+# Install gemini-cli
+npm install -g @google/gemini-cli
+
+# Install FiraCode
+sudo apt install fonts-firacode -y
+
+# Install kitty
+sudo apt install kitty -y
+ln -s "$PWD/kitty" "$(realpath ~/.config/kitty)"
+
+# Install fzf
+sudo apt install fzf
+sed -i 's/plugins=(\([^)]*\))/plugins=(\1 fzf)/' ~/.zshrc && source ~/.zshrc
+
+echo "$PWD/zshrc" >> ~/.zshrc
+source ~/.zshrc

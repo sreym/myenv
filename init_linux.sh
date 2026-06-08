@@ -6,7 +6,7 @@
 # sudo apt-get update
 # sudo apt-get install neovim -y
 sudo snap install nvim --classic
-ln -s "$PWD/nvim" "$(realpath ~/.config/nvim)"
+ln -s "$PWD/nvim" "$(realpath ~/.config)/nvim"
 
 # Install zsh
 sudo apt install zsh git -y
@@ -27,11 +27,12 @@ sudo apt install fonts-firacode -y
 
 # Install kitty
 sudo apt install kitty -y
-ln -s "$PWD/kitty" "$(realpath ~/.config/kitty)"
+ln -s "$PWD/kitty" "$(realpath ~/.config)/kitty"
 
 # Install fzf
 sudo apt install fzf
 sed -i 's/plugins=(\([^)]*\))/plugins=(\1 fzf)/' ~/.zshrc && source ~/.zshrc
 
-echo "$PWD/zshrc" >> ~/.zshrc
+echo "source '$PWD/zshrc'" >> ~/.zshrc
 source ~/.zshrc
+

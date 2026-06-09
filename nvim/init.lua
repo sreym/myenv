@@ -34,3 +34,22 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
 })
 
+require("cvs-annotate").setup({
+    enabled     = true,
+    format      = " %revision | %author | %date",
+    cache_ttl   = 300,   -- 5 minutes
+})
+
+-- In your init.lua or a dedicated statusline config:
+vim.o.statusline = table.concat({
+    "%f",          -- filename
+    " %m%r",       -- modified/readonly flags
+    "%=",          -- right-align from here
+    "%{v:lua.require('cvs-annotate').get_current_line_annotation()}",
+    "  %l:%c ",   -- line:col
+}, "")
+
+require("cvs-log").setup({ width = 60 })
+vim.keymap.set('n', '<leader>l', ':CvsLog<CR>', { silent = true })
+
+

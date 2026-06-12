@@ -1,5 +1,13 @@
 {
   "plugins": {
+    "leap.nvim": {
+      "rev": "d7f8ee64155b7790188f17a993390f32577cfb81",
+      "src": "https://codeberg.org/andyg/leap.nvim"
+    },
+    "lualine.nvim": {
+      "rev": "221ce6b2d999187044529f49da6554a92f740a96",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
+    },
     "neo-tree.nvim": {
       "rev": "83e7a2982fd12b9c3d35bc39dd5877cd91a02a61",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim",

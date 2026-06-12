@@ -15,28 +15,16 @@ vim.g.clipboard = 'osc52'       -- Enable global clipbaord between ssh sessions
 vim.pack.add({ 'https://github.com/vague-theme/vague.nvim' })
 vim.cmd.colorscheme('vague')
 
-vim.o.list = true
-vim.o.listchars = 'tab:» ,trail:•'
-
-local function setup_trailing_whitespace()
-  vim.api.nvim_set_hl(0, 'TrailingWhitespace', { bg = 'LightRed' })
-end
-setup_trailing_whitespace()
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', callback = setup_trailing_whitespace })
-vim.api.nvim_create_autocmd('BufEnter', {
-  pattern = '*',
-  command = [[
-    syntax clear TrailingWhitespace |
-    syntax match TrailingWhitespace "\s\+$"
-  ]]}
-)
-
 vim.pack.add({ 'https://github.com/m4xshen/smartcolumn.nvim' })
+
+vim.pack.add({ 'https://codeberg.org/andyg/leap.nvim' })
+vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+vim.keymap.set('n',               'S', '<Plug>(leap-from-window)')
 
 vim.pack.add({
   {
     src = 'https://github.com/nvim-neo-tree/neo-tree.nvim',
-    version = vim.version.range('3')
+    version = vim.version.range('3'),
   },
   -- dependencies
   'https://github.com/nvim-lua/plenary.nvim',
@@ -59,16 +47,71 @@ require('cvs-annotate').setup({
   cache_ttl   = 300,   -- 5 minutes
 })
 
--- In your init.lua or a dedicated statusline config:
-vim.o.statusline = table.concat({
-  '%f',          -- filename
-  ' %m%r',       -- modified/readonly flags
-  '%=',          -- right-align from here
-  "%{v:lua.require('cvs-annotate').get_current_line_annotation()}",
-  '  %l:%c ',   -- line:col
-}, '')
-
 require('cvs-log').setup({ width = 60 })
 vim.keymap.set('n', '<leader>l', ':CvsLog<CR>', { silent = true })
 
+-- statusline (using lualine)
+vim.o.showmode = false      -- lualine shows mode already
+vim.o.cmdheight = 0         -- hide command line when not in use
+vim.pack.add({ 'https://github.com/nvim-lualine/lualine.nvim' })
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    always_show_tabline = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+      refresh_time = 16, -- ~60fps
+      events = {
+        'WinEnter',
+        'BufEnter',
+        'BufWritePost',
+        'SessionLoadPost',
+        'FileChangedShellPost',
+        'VimResized',
+        'Filetype',
+        'CursorMoved',
+        'CursorMovedI',
+        'ModeChanged',
+      },
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {
+      'filename',
+      {
+        function() return require('cvs-annotate').get_current_line_annotation() end,
+        cond = function() return require('cvs-annotate').config.enabled end,
+      },
+    },
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
 

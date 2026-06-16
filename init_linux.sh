@@ -36,3 +36,5 @@ sed -i 's/plugins=(\([^)]*\))/plugins=(\1 fzf)/' ~/.zshrc && source ~/.zshrc
 echo "source '$PWD/zshrc'" >> ~/.zshrc
 source ~/.zshrc
 
+# Install zoxide
+sudo apt install zoxide -y

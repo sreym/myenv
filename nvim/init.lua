@@ -115,3 +115,9 @@ require('lualine').setup {
   extensions = {}
 }
 
+vim.pack.add({ 'https://github.com/lukas-reineke/virt-column.nvim' })
+require('virt-column').setup({
+   char = '┃' ,
+   virtcolumn = '+1,80'
+})
+

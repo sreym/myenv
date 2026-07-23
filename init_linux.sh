@@ -38,3 +38,10 @@ source ~/.zshrc
 
 # Install zoxide
 sudo apt install zoxide -y
+
+# Fix kitty
+sudo tee /usr/local/bin/kitty << 'EOF' >/dev/null && sudo chmod +x /usr/local/bin/kitty
+#!/bin/bash
+export LIBGL_ALWAYS_SOFTWARE=1
+exec /usr/bin/kitty "$@"
+EOF

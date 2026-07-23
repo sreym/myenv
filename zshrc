@@ -36,9 +36,9 @@ PROMPT+=' %{$fg[cyan]%}%3d%{$reset_color%} $(git_prompt_info)'
 _myenv_dir="${0:A:h}"
 _myenv_stamp="${HOME}/.cache/myenv_last_update"
 mkdir -p "${HOME}/.cache" 2>/dev/null
-if [[ ! -f "$_myenv_stamp" ]] || (( $(date +%s) - $(stat -f %m "$_myenv_stamp" 2>/dev/null || stat -c %Y "$_myenv_stamp" 2>/dev/null || echo 0) > 604800 )); then
-    touch "$_myenv_stamp"
-    (cd "$_myenv_dir" && git pull --quiet --ff-only) &!
-fi
+# if [[ ! -f "$_myenv_stamp" ]] || (( $(date +%s) - $(stat -f %m "$_myenv_stamp" 2>/dev/null || stat -c %Y "$_myenv_stamp" 2>/dev/null || echo 0) > 604800 )); then
+#    touch "$_myenv_stamp"
+#    (cd "$_myenv_dir" && git pull --quiet --ff-only) &!
+# fi
 unset _myenv_dir _myenv_stamp
 

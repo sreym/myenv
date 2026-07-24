@@ -12,6 +12,8 @@ g() {
     fi
 }
 
+export SHOW_LINE_NUMBERS=yes
+
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude CVS --exclude "build.*"'
 
 eval "$(zoxide init zsh)"

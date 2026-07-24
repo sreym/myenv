@@ -22,9 +22,6 @@ fnm use lts-latest
 # Install gemini-cli
 npm install -g @google/gemini-cli
 
-# Install FiraCode
-sudo apt install fonts-firacode -y
-
 # Install kitty
 sudo apt install kitty -y
 ln -s "$PWD/kitty" "$(realpath ~/.config)/kitty"
@@ -45,3 +42,11 @@ sudo tee /usr/local/bin/kitty << 'EOF' >/dev/null && sudo chmod +x /usr/local/bi
 export LIBGL_ALWAYS_SOFTWARE=1
 exec /usr/bin/kitty "$@"
 EOF
+
+# Install firacode nerd
+mkdir -p ~/.local/share/fonts/NerdFontsSymbolsOnly
+curl -fLO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.zip
+unzip -o NerdFontsSymbolsOnly.zip -d ~/.local/share/fonts/NerdFontsSymbolsOnly
+rm NerdFontsSymbolsOnly.zip
+fc-cache -fv
+

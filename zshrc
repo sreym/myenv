@@ -44,3 +44,4 @@ mkdir -p "${HOME}/.cache" 2>/dev/null
 # fi
 unset _myenv_dir _myenv_stamp
 
+alias bat="batcat"

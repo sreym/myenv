@@ -50,3 +50,5 @@ unzip -o NerdFontsSymbolsOnly.zip -d ~/.local/share/fonts/NerdFontsSymbolsOnly
 rm NerdFontsSymbolsOnly.zip
 fc-cache -fv
 
+# Install batcat
+sudo apt install bat

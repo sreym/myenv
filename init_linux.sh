@@ -52,3 +52,6 @@ fc-cache -fv
 
 # Install batcat
 sudo apt install bat
+
+# Install tmux
+ln -s "$PWD/tmux.conf" "$(realpath ~/.tmux.conf)"

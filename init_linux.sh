@@ -5,6 +5,7 @@
 # sudo add-apt-repository ppa:neovim-ppa/unstable
 # sudo apt-get update
 # sudo apt-get install neovim -y
+sudo apt install snapd
 sudo snap install nvim --classic
 ln -s "$PWD/nvim" "$(realpath ~/.config)/nvim"
 

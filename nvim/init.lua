@@ -121,3 +121,6 @@ require('virt-column').setup({
    virtcolumn = '+1,80'
 })
 
+-- Copilot
+vim.pack.add({ 'https://github.com/github/copilot.vim' })
+

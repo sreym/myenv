@@ -50,6 +50,9 @@ require('cvs-annotate').setup({
 require('cvs-log').setup({ width = 60 })
 vim.keymap.set('n', '<leader>l', ':CvsLog<CR>', { silent = true })
 
+require('cvs-zon-link').setup({})
+vim.keymap.set('n', '<leader>u', ':CvsZonLink<CR>', { silent = true })
+
 -- statusline (using lualine)
 vim.o.showmode = false      -- lualine shows mode already
 vim.o.cmdheight = 0         -- hide command line when not in use
